@@ -11,7 +11,7 @@
     },
     {
       "addLabels": [ "renovate/helm", "renovate/automerge" ],
-      "automerge": true,
+      "automerge": false,
       "matchPackageNames": [ "helm" ],
       "matchManagers": [ "regex" ],
       "matchUpdateTypes": [ "minor", "patch"]
@@ -21,7 +21,7 @@
   "rebaseWhen": "behind-base-branch",
   "regexManagers": [
     {
-      "description": "Update helm version",
+      "description": "Update version",
       "fileMatch": [
         "^Makefile$"
       ],
