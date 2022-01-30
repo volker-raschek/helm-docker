@@ -1,8 +1,33 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "automerge": true,
   "automergeStrategy": "merge-commit",
   "automergeType": "pr",
+  "labels": [ "renovate" ],
+  "packageRules": [
+    {
+      "addLabels": [ "renovate/droneci", "renovate/automerge" ],
+      "automerge": true,
+      "matchManagers": "droneci"
+    },
+    {
+      "addLabels": [ "renovate/helm", "renovate/automerge" ],
+      "automerge": true,
+      "matchPackageNames": [ "helm" ],
+      "matchManagers": [ "regex" ],
+      "matchUpdateTypes": [ "minor", "patch"]
+    }
+  ],
   "rebaseLabel": "renovate/rebase",
-  "rebaseWhen": "behind-base-branch"
+  "rebaseWhen": "behind-base-branch",
+  "regexManagers": [
+    {
+      "description": "Update helm version",
+      "fileMatch": [
+        "^Makefile$"
+      ],
+      "matchStrings": [
+        "HELM_VERSION\\?=(?<currentValue>.*) # renovate: datasource=(?<datasource>.*) depName=(?<depName>.*) (lookupName=(?<lookupName>.*))? (versioning=(?<versioning>.*))?"
+      ]
+    }
+  ]
 }

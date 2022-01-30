@@ -30,7 +30,7 @@ case `uname -m` in
 esac
 
 apk add --update --no-cache wget git
-wget ${BASE_URL}/helm-v${VERSION}-linux-${ARCH}.tar.gz -O - | tar -xz
+wget ${BASE_URL}/helm-${VERSION}-linux-${ARCH}.tar.gz -O - | tar -xz
 mv linux-${ARCH}/helm /usr/bin/helm
 chmod +x /usr/bin/helm
 rm -rf linux-${ARCH}
