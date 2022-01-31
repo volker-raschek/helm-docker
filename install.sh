@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -xe
+
 BASE_URL=https://get.helm.sh
 
 if [ -z ${VERSION+x} ]; then
