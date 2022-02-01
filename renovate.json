@@ -27,7 +27,7 @@
         "^Makefile$"
       ],
       "matchStrings": [
-        "HELM_VERSION\\?=(?<currentValue>.*) # renovate: datasource=(?<datasource>.*) depName=(?<depName>.*) (lookupName=(?<lookupName>.*))? (versioning=(?<versioning>.*))?"
+        "HELM_VERSION\\?=(?<currentValue>.*) # renovate: datasource=(?<datasource>.*) depName=(?<depName>.*)( lookupName=(?<lookupName>.*))?( versioning=(?<versioning>.*))?"
       ]
     }
   ]
