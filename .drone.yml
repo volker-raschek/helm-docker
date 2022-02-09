@@ -54,16 +54,18 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
     auto_tag: false
+    dockerfile: Dockerfile
     dry_run: true
-    tags: latest-amd64
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
+    tags: latest-amd64
     username:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-    no_cache: true
   volumes:
   - name: docker_socket
     path: /var/run/docker.sock
@@ -115,16 +117,18 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
     auto_tag: false
+    dockerfile: Dockerfile
     dry_run: true
-    tags: latest-arm-v7
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
+    tags: latest-arm-v7
     username:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-    no_cache: true
 
 - name: notify
   image: drillster/drone-email
@@ -176,16 +180,18 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
     auto_tag: false
+    dockerfile: Dockerfile
     dry_run: true
-    tags: latest-arm64-v8
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
+    tags: latest-arm64-v8
     username:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-    no_cache: true
 
 - name: notify
   image: drillster/drone-email
@@ -237,15 +243,17 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
     auto_tag: false
-    tags: latest-amd64
+    dockerfile: Dockerfile
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
+    tags: latest-amd64
     username:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-    no_cache: true
   volumes:
   - name: docker_socket
     path: /var/run/docker.sock
@@ -296,15 +304,17 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
     auto_tag: false
-    tags: latest-arm-v7
+    dockerfile: Dockerfile
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
+    tags: latest-arm-v7
     username:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-    no_cache: true
 
 - name: notify
   image: drillster/drone-email
@@ -355,15 +365,17 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
     auto_tag: false
-    tags: latest-arm64-v8
+    dockerfile: Dockerfile
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
+    tags: latest-arm64-v8
     username:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-    no_cache: true
 
 - name: notify
   image: drillster/drone-email
@@ -465,9 +477,12 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
-    auto_tag: true
     auto_tag_suffix: amd64
+    auto_tag: true
+    dockerfile: Dockerfile
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
     username:
       from_secret: container_image_registry_user
@@ -475,7 +490,6 @@ steps:
       from_secret: container_image_registry_password
     build_args:
     - HELM_VERSION=${DRONE_TAG}
-    no_cache: true
   volumes:
   - name: docker_socket
     path: /var/run/docker.sock
@@ -520,9 +534,12 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
-    auto_tag: true
     auto_tag_suffix: arm-v7
+    auto_tag: true
+    dockerfile: Dockerfile
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
     username:
       from_secret: container_image_registry_user
@@ -530,7 +547,6 @@ steps:
       from_secret: container_image_registry_password
     build_args:
     - HELM_VERSION=${DRONE_TAG}
-    no_cache: true
   volumes:
   - name: docker_socket
     path: /var/run/docker.sock
@@ -575,9 +591,12 @@ steps:
 - name: build
   image: plugins/docker
   settings:
-    dockerfile: Dockerfile
-    auto_tag: true
     auto_tag_suffix: arm64-v8
+    auto_tag: true
+    dockerfile: Dockerfile
+    force_tag: true
+    no_cache: true
+    purge: true
     repo: volkerraschek/helm
     username:
       from_secret: container_image_registry_user
@@ -585,7 +604,6 @@ steps:
       from_secret: container_image_registry_password
     build_args:
     - HELM_VERSION=${DRONE_TAG}
-    no_cache: true
   volumes:
   - name: docker_socket
     path: /var/run/docker.sock
