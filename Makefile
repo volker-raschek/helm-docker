@@ -1,6 +1,6 @@
 # HELM_VERSION
 # Only required to install a specifiy version
-HELM_VERSION?=v3.8.0 # renovate: datasource=github-releases depName=helm lookupName=helm/helm versioning=semver
+HELM_VERSION?=v3.8.1 # renovate: datasource=github-releases depName=helm lookupName=helm/helm versioning=semver
 
 # CONTAINER_RUNTIME
 # The CONTAINER_RUNTIME variable will be used to specified the path to a
