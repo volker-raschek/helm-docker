@@ -5,7 +5,7 @@ HELM_VERSION?=v3.9.2 # renovate: datasource=github-releases depName=helm/helm
 # CONTAINER_RUNTIME
 # The CONTAINER_RUNTIME variable will be used to specified the path to a
 # container runtime. This is needed to start and run a container image.
-CONTAINER_RUNTIME?=$(shell which docker)
+CONTAINER_RUNTIME?=$(shell which podman)
 
 # HELM_IMAGE_REGISTRY_NAME
 # Defines the name of the new container to be built using several variables.
