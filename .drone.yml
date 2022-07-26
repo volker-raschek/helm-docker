@@ -68,9 +68,6 @@ steps:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-  volumes:
-  - name: docker_socket
-    path: /var/run/docker.sock
 
 - name: email-notification
   environment:
@@ -89,11 +86,6 @@ steps:
     status:
     - changed
     - failure
-
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
 
 depends_on:
 - linter
@@ -152,11 +144,6 @@ steps:
     - changed
     - failure
 
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
-
 depends_on:
 - linter
 
@@ -214,11 +201,6 @@ steps:
     - changed
     - failure
 
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
-
 depends_on:
 - linter
 
@@ -256,9 +238,6 @@ steps:
       from_secret: container_image_registry_user
     password:
       from_secret: container_image_registry_password
-  volumes:
-  - name: docker_socket
-    path: /var/run/docker.sock
 
 - name: email-notification
   environment:
@@ -277,11 +256,6 @@ steps:
     status:
     - changed
     - failure
-
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
 
 depends_on:
 - linter
@@ -338,11 +312,6 @@ steps:
     - changed
     - failure
 
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
-
 depends_on:
 - linter
 
@@ -397,11 +366,6 @@ steps:
     status:
     - changed
     - failure
-
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
 
 depends_on:
 - linter
@@ -494,9 +458,6 @@ steps:
       from_secret: container_image_registry_password
     build_args:
     - HELM_VERSION=${DRONE_TAG}
-  volumes:
-  - name: docker_socket
-    path: /var/run/docker.sock
 
 - name: email-notification
   environment:
@@ -515,11 +476,6 @@ steps:
     status:
     - changed
     - failure
-
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
 
 trigger:
   event:
@@ -553,9 +509,6 @@ steps:
       from_secret: container_image_registry_password
     build_args:
     - HELM_VERSION=${DRONE_TAG}
-  volumes:
-  - name: docker_socket
-    path: /var/run/docker.sock
 
 - name: email-notification
   environment:
@@ -574,11 +527,6 @@ steps:
     status:
     - changed
     - failure
-
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
 
 trigger:
   event:
@@ -612,9 +560,6 @@ steps:
       from_secret: container_image_registry_password
     build_args:
     - HELM_VERSION=${DRONE_TAG}
-  volumes:
-  - name: docker_socket
-    path: /var/run/docker.sock
 
 - name: email-notification
   environment:
@@ -633,11 +578,6 @@ steps:
     status:
     - changed
     - failure
-
-volumes:
-- name: docker_socket
-  host:
-    path: /var/run/docker.sock
 
 trigger:
   event:
