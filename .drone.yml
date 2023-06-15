@@ -74,6 +74,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     tags: latest-amd64
@@ -138,6 +140,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     tags: latest-arm-v7
@@ -202,6 +206,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     tags: latest-arm64-v8
@@ -265,6 +271,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     tags: latest-amd64
@@ -327,6 +335,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     tags: latest-arm-v7
@@ -389,6 +399,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     tags: latest-arm64-v8
@@ -571,6 +583,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     username:
@@ -629,6 +643,8 @@ steps:
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     username:
@@ -680,13 +696,15 @@ steps:
 
 - name: build
   image: docker.io/plugins/docker:20.10.9
-  settings:    
+  settings:
     auto_tag: true
     auto_tag_suffix: arm64-v8
     dockerfile: Dockerfile
     force_tag: true
     no_cache: true
     purge: true
+    mirror:
+      from_secret: docker_io_mirror
     registry: git.cryptic.systems
     repo: git.cryptic.systems/volker.raschek/helm
     username:
