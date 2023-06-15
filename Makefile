@@ -9,8 +9,8 @@ CONTAINER_RUNTIME?=$(shell which podman)
 
 # HELM_IMAGE_REGISTRY_NAME
 # Defines the name of the new container to be built using several variables.
-HELM_IMAGE_REGISTRY_NAME:=docker.io
-HELM_IMAGE_REGISTRY_USER:=volkerraschek
+HELM_IMAGE_REGISTRY_NAME:=git.cryptic.systems
+HELM_IMAGE_REGISTRY_USER:=volker.raschek
 
 HELM_IMAGE_NAMESPACE?=${HELM_IMAGE_REGISTRY_USER}
 HELM_IMAGE_NAME:=helm
