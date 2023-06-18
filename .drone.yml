@@ -6,9 +6,6 @@ name: linter
 clone:
   disable: true
 
-platform:
-  os: linux
-
 steps:
 - name: clone
   image: git.cryptic.systems/volker.raschek/git:1.2.1
