@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.18.2
+FROM docker.io/library/alpine:3.18.3
 
 ARG HELM_VERSION
 
