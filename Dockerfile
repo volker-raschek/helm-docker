@@ -10,7 +10,8 @@ RUN [[ ${HELM_VERSION} != "" ]]; bash /tmp/install.sh --version ${HELM_VERSION}
 
 RUN rm /tmp/install.sh
 
-# Install additionally cm-push plugin
-RUN helm plugin install https://github.com/chartmuseum/helm-push.git
+# Install additionally helm plugins
+RUN helm plugin install https://github.com/chartmuseum/helm-push.git && \
+    helm plugin install https://github.com/helm-unittest/helm-unittest.git
 
 ENTRYPOINT [ "/usr/local/bin/helm" ]
