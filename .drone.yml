@@ -66,7 +66,7 @@ steps:
   image: git.cryptic.systems/volker.raschek/git:1.4.0
 
 - name: build
-  image: harbor.cryptic.systems/docker/plugins/docker:20.18.8
+  image: harbor.cryptic.systems/docker/plugins/docker:20.18.6
   settings:
     auto_tag: false
     dockerfile: Dockerfile
@@ -132,7 +132,7 @@ steps:
   image: git.cryptic.systems/volker.raschek/git:1.4.0
 
 - name: build
-  image: harbor.cryptic.systems/docker/plugins/docker:20.18.8
+  image: harbor.cryptic.systems/docker/plugins/docker:20.18.6
   settings:
     auto_tag: false
     dockerfile: Dockerfile
@@ -198,7 +198,7 @@ steps:
   image: git.cryptic.systems/volker.raschek/git:1.4.0
 
 - name: build
-  image: harbor.cryptic.systems/docker/plugins/docker:20.18.8
+  image: harbor.cryptic.systems/docker/plugins/docker:20.18.6
   settings:
     auto_tag: false
     dockerfile: Dockerfile
@@ -262,7 +262,7 @@ steps:
   image: git.cryptic.systems/volker.raschek/git:1.4.0
 
 - name: build
-  image: harbor.cryptic.systems/docker/plugins/docker:20.18.8
+  image: harbor.cryptic.systems/docker/plugins/docker:20.18.6
   settings:
     auto_tag: false
     dockerfile: Dockerfile
@@ -446,7 +446,7 @@ steps:
   image: git.cryptic.systems/volker.raschek/git:1.4.0
 
 - name: build
-  image: harbor.cryptic.systems/docker/plugins/docker:20.18.8
+  image: harbor.cryptic.systems/docker/plugins/docker:20.18.6
   settings:
     auto_tag: true
     auto_tag_suffix: amd64
@@ -506,7 +506,7 @@ steps:
   image: git.cryptic.systems/volker.raschek/git:1.4.0
 
 - name: build
-  image: harbor.cryptic.systems/docker/plugins/docker:20.18.8
+  image: harbor.cryptic.systems/docker/plugins/docker:20.18.6
   settings:
     auto_tag: true
     auto_tag_suffix: arm64-v8
