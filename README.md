@@ -1,6 +1,5 @@
 # helm
 
-[![Build Status](https://drone.cryptic.systems/api/badges/volker.raschek/helm-docker/status.svg)](https://drone.cryptic.systems/volker.raschek/helm-docker)
 
 This project contains all sources to build the container image `docker.io/volkerraschek/helm`. The primary goal of this
 project is to package the binary `helm` as container image to provide the functionally for CI/CD workflows. The source
