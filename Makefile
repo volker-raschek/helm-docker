@@ -16,7 +16,6 @@ HELM_IMAGE_NAMESPACE?=${HELM_IMAGE_REGISTRY_USER}
 HELM_IMAGE_NAME:=helm
 HELM_IMAGE_VERSION?=latest
 HELM_IMAGE_FULLY_QUALIFIED=${HELM_IMAGE_REGISTRY_NAME}/${HELM_IMAGE_NAMESPACE}/${HELM_IMAGE_NAME}:${HELM_IMAGE_VERSION}
-HELM_IMAGE_UNQUALIFIED=${HELM_IMAGE_NAMESPACE}/${HELM_IMAGE_NAME}:${HELM_IMAGE_VERSION}
 
 # BUILD CONTAINER IMAGE
 # ==============================================================================
@@ -28,14 +27,14 @@ container-image/build:
 		--no-cache \
 		--pull \
 		--tag ${HELM_IMAGE_FULLY_QUALIFIED} \
-		--tag ${HELM_IMAGE_UNQUALIFIED} \
+		--tag \
 		.
 
 # DELETE CONTAINER IMAGE
 # ==============================================================================
 PHONY:=container-image/delete
 container-image/delete:
-	- ${CONTAINER_RUNTIME} image rm ${HELM_IMAGE_FULLY_QUALIFIED} ${HELM_IMAGE_UNQUALIFIED}
+	- ${CONTAINER_RUNTIME} image rm ${HELM_IMAGE_FULLY_QUALIFIED}
 	- ${CONTAINER_RUNTIME} image rm ${BASE_IMAGE_FULL}
 
 # PUSH CONTAINER IMAGE
