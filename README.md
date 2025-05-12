@@ -2,14 +2,14 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/volkerraschek/helm)](https://hub.docker.com/r/volkerraschek/helm)
 
-This project contains all sources to build the container image `docker.io/volkerraschek/helm`. The primary goal of this
-project is to package the binary `helm` as container image to provide the functionally for CI/CD workflows. The source
-code of the binary can be found in the upstream project of [helm](github.com/helm/helm).
+This project contains all sources to build the container image `git.cryptic.systems/volker.raschek/helm`. The primary
+goal of this project is to package the binary `helm` as container image to provide the functionally for CI/CD workflows.
+The source code of the binary can be found in the upstream project of [helm](github.com/helm/helm).
 
 ## drone
 
 Here is an example to lint, package and deploy a chart to chartmuseum via
-`docker.io/volkerraschek/helm`.
+`git.cryptic.systems/volker.raschek/helm`.
 
 ```yaml
 kind: pipeline
@@ -24,7 +24,7 @@ steps:
 - name: helm lint
   commands:
   - helm lint
-  image: docker.io/volkerraschek/helm:latest
+  image: git.cryptic.systems/volker.raschek/helm:latest
   resources:
     limits:
       cpu: 50
@@ -50,7 +50,7 @@ steps:
       from_secret: helm_repo_password
     HELM_REPO_USERNAME:
       from_secret: helm_repo_username
-  image: docker.io/volkerraschek/helm:latest
+  image: git.cryptic.systems/volker.raschek/helm:latest
   resources:
     limits:
       cpu: 50
