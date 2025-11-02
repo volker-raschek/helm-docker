@@ -1,5 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^README\\.md$"
+      ],
+      "matchStrings": [
+        "IMAGE_VERSION=(?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "helm/helm",
+      "versioningTemplate": "semver"
+    }
+  ],
   "extends": [
     "local>volker.raschek/renovate-config:default#master",
     "local>volker.raschek/renovate-config:container#master",
@@ -8,9 +22,16 @@
   ],
   "packageRules": [
     {
-      "automerge": false,
-      "matchPackageNames": [ "helm" ],
-      "matchManagers": [ "regex" ]
+      "addLabels": [
+        "renovate/automerge"
+      ],
+      "automerge": true,
+      "matchPackageNames": [
+        "helm/helm"
+      ],
+      "matchManagers": [
+        "regex"
+      ]
     }
   ]
 }

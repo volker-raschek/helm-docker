@@ -4,12 +4,34 @@ on:
   push:
     tags:
     - "**"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag which should be released"
+        type: string
+        required: true
 
 jobs:
   push-arm64:
     runs-on: ubuntu-latest-arm64
     steps:
+      - id: version_extraction
+        name: Extract git tag
+        run: |
+          VERSION="${{ inputs.tag || github.ref_name }}"
+          VERSION="${VERSION#refs/*/}"
+
+          echo "Version (raw):      ${VERSION}"
+          echo "Version (cleaned):  ${VERSION/v/}"
+
+          echo "version_raw=${VERSION}" >> $GITHUB_OUTPUT
+          echo "version_cleaned=${VERSION/v/}" >> $GITHUB_OUTPUT
+
       - uses: actions/checkout@v5.0.0
+        with:
+          fetch-tags: true
+          ref: "${{ steps.version_extraction.outputs.version_raw }}"
+
       - uses: docker/setup-qemu-action@v3.6.0
       - uses: docker/setup-buildx-action@v3.11.1
 
@@ -21,21 +43,35 @@ jobs:
 
       - name: Build and push image
         run: |
-          TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
-
           docker buildx build \
             --build-arg HELM_VERSION=${{ github.ref_name }} \
             --file Dockerfile \
             --platform linux/arm64 \
             --provenance false \
             --push \
-            --tag git.cryptic.systems/volker.raschek/helm:${TAG}-arm64 \
+            --tag git.cryptic.systems/volker.raschek/helm:${{ steps.version_extraction.outputs.version_cleaned }}-arm64 \
             .
 
   push-amd64:
     runs-on: ubuntu-latest-amd64
     steps:
+      - id: version_extraction
+        name: Extract git tag
+        run: |
+          VERSION="${{ inputs.tag || github.ref_name }}"
+          VERSION="${VERSION#refs/*/}"
+
+          echo "Version (raw):      ${VERSION}"
+          echo "Version (cleaned):  ${VERSION/v/}"
+
+          echo "version_raw=${VERSION}" >> $GITHUB_OUTPUT
+          echo "version_cleaned=${VERSION/v/}" >> $GITHUB_OUTPUT
+
       - uses: actions/checkout@v5.0.0
+        with:
+          fetch-tags: true
+          ref: "${{ steps.version_extraction.outputs.version_raw }}"
+
       - uses: docker/setup-qemu-action@v3.6.0
       - uses: docker/setup-buildx-action@v3.11.1
 
@@ -47,15 +83,13 @@ jobs:
 
       - name: Build and push image
         run: |
-          TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
-
           docker buildx build \
             --build-arg HELM_VERSION=${{ github.ref_name }} \
             --file Dockerfile \
             --platform linux/amd64 \
             --provenance false \
             --push \
-            --tag git.cryptic.systems/volker.raschek/helm:${TAG}-amd64 \
+            --tag git.cryptic.systems/volker.raschek/helm:${{ steps.version_extraction.outputs.version_cleaned }}-amd64 \
             .
 
   push-manifest:
@@ -64,6 +98,18 @@ jobs:
     - push-arm64
     - push-amd64
     steps:
+      - id: version_extraction
+        name: Extract git tag
+        run: |
+          VERSION="${{ inputs.tag || github.ref_name }}"
+          VERSION="${VERSION#refs/*/}"
+
+          echo "Version (raw):      ${VERSION}"
+          echo "Version (cleaned):  ${VERSION/v/}"
+
+          echo "version_raw=${VERSION}" >> $GITHUB_OUTPUT
+          echo "version_cleaned=${VERSION/v/}" >> $GITHUB_OUTPUT
+
       - uses: docker/login-action@v3.6.0
         with:
           registry: git.cryptic.systems
@@ -72,30 +118,38 @@ jobs:
 
       - name: Create and push manifest
         run: |
-          TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+          docker manifest create git.cryptic.systems/volker.raschek/helm:${{ steps.version_extraction.outputs.version_cleaned }} \
+            --amend git.cryptic.systems/volker.raschek/helm:${{ steps.version_extraction.outputs.version_cleaned }}-amd64 \
+            --amend git.cryptic.systems/volker.raschek/helm:${{ steps.version_extraction.outputs.version_cleaned }}-arm64
 
-          docker manifest create git.cryptic.systems/volker.raschek/helm:${TAG} \
-            --amend git.cryptic.systems/volker.raschek/helm:${TAG}-amd64 \
-            --amend git.cryptic.systems/volker.raschek/helm:${TAG}-arm64
-
-          docker manifest push git.cryptic.systems/volker.raschek/helm:${TAG}
+          docker manifest push git.cryptic.systems/volker.raschek/helm:${{ steps.version_extraction.outputs.version_cleaned }}
 
   sync-to-hub-docker-io:
     needs:
     - push-manifest
     runs-on: ubuntu-latest
     steps:
-    - name: Copy images to docker.io
-      run: |
-        TAG=$(echo ${{ github.ref_name }} | sed 's/v//gm')
+      - id: version_extraction
+        name: Extract git tag
+        run: |
+          VERSION="${{ inputs.tag || github.ref_name }}"
+          VERSION="${VERSION#refs/*/}"
 
-        apt-get update --yes
-        apt-get install --yes skopeo
-        skopeo copy \
-          --all \
-          --dest-password ${{ secrets.DOCKER_IO_PASSWORD }} \
-          --dest-username ${{ secrets.DOCKER_IO_USERNAME }} \
-          --src-password ${{ secrets.GIT_CRYPTIC_SYSTEMS_PACKAGE_REGISTRY_TOKEN }} \
-          --src-username volker.raschek \
-            docker://git.cryptic.systems/volker.raschek/helm:${TAG} \
-            docker://docker.io/volkerraschek/helm:${TAG}
+          echo "Version (raw):      ${VERSION}"
+          echo "Version (cleaned):  ${VERSION/v/}"
+
+          echo "version_raw=${VERSION}" >> $GITHUB_OUTPUT
+          echo "version_cleaned=${VERSION/v/}" >> $GITHUB_OUTPUT
+
+      - name: Copy images to docker.io
+        run: |
+          apt-get update --yes
+          apt-get install --yes skopeo
+          skopeo copy \
+            --all \
+            --dest-password ${{ secrets.DOCKER_IO_PASSWORD }} \
+            --dest-username ${{ secrets.DOCKER_IO_USERNAME }} \
+            --src-password ${{ secrets.GIT_CRYPTIC_SYSTEMS_PACKAGE_REGISTRY_TOKEN }} \
+            --src-username volker.raschek \
+              docker://git.cryptic.systems/volker.raschek/helm:${{ steps.version_extraction.outputs.version_cleaned }} \
+              docker://docker.io/volkerraschek/helm:${{ steps.version_extraction.outputs.version_cleaned }}
