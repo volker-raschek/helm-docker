@@ -44,7 +44,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
-            --build-arg HELM_VERSION=${{ github.ref_name }} \
+            --build-arg HELM_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
             --file Dockerfile \
             --platform linux/arm64 \
             --provenance false \
@@ -84,7 +84,7 @@ jobs:
       - name: Build and push image
         run: |
           docker buildx build \
-            --build-arg HELM_VERSION=${{ github.ref_name }} \
+            --build-arg HELM_VERSION=${{ steps.version_extraction.outputs.version_raw }} \
             --file Dockerfile \
             --platform linux/amd64 \
             --provenance false \
