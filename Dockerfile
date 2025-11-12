@@ -10,9 +10,4 @@ RUN if [[ -n "${HELM_VERSION+x}" ]]; then bash /tmp/install.sh --version "${HELM
 
 RUN rm /tmp/install.sh
 
-# Install additionally helm plugins
-RUN helm plugin install https://github.com/chartmuseum/helm-push.git && \
-    helm plugin install https://github.com/helm-unittest/helm-unittest.git && \
-    helm plugin install https://github.com/losisin/helm-values-schema-json.git
-
 ENTRYPOINT [ "/usr/local/bin/helm" ]
