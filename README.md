@@ -7,7 +7,7 @@ goal of this project is to package the binary `helm` as container image and prov
 The source code of the binary can be found in the upstream project of [helm](github.com/helm/helm).
 
 ```bash
-IMAGE_VERSION=4.0.2
+IMAGE_VERSION=4.0.4
 docker run \
   --rm \
   --volume "$(pwd):$(pwd)" \
