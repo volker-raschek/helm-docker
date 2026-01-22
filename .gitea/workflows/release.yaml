@@ -27,7 +27,7 @@ jobs:
           echo "version_raw=${VERSION}" >> $GITHUB_OUTPUT
           echo "version_cleaned=${VERSION/v/}" >> $GITHUB_OUTPUT
 
-      - uses: actions/checkout@v6.0.1
+      - uses: actions/checkout@v6.0.2
         with:
           fetch-tags: true
           ref: "${{ steps.version_extraction.outputs.version_raw }}"
@@ -67,7 +67,7 @@ jobs:
           echo "version_raw=${VERSION}" >> $GITHUB_OUTPUT
           echo "version_cleaned=${VERSION/v/}" >> $GITHUB_OUTPUT
 
-      - uses: actions/checkout@v6.0.1
+      - uses: actions/checkout@v6.0.2
         with:
           fetch-tags: true
           ref: "${{ steps.version_extraction.outputs.version_raw }}"
