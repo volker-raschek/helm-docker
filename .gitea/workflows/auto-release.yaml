@@ -13,6 +13,7 @@ env:
 jobs:
   tag_on_change:
     permissions:
+      actions: write
       contents: write
 
     runs-on: ubuntu-latest
